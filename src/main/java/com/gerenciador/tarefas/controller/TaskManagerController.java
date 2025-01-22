@@ -36,7 +36,6 @@ public class TaskManagerController {
                 .description(taskSave.getDescription())
                 .creator(taskSave.getCreator().getUsername())
                 .build();
-
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -73,7 +72,6 @@ public class TaskManagerController {
                             .build();
                 }).toList();
 
-
         GetTasksPagedResponse response = GetTasksPagedResponse
                 .builder()
                 .pageCurrent(tasksPaged.getNumber())
@@ -81,12 +79,11 @@ public class TaskManagerController {
                 .totalItems(tasksPaged.getTotalElements())
                 .tasks(tasks)
                 .build();
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UpdateTaskResponse> updateTask(@PathVariable Long id, @RequestBody UpdateTaskRequest request) {
+    public ResponseEntity<UpdateTaskResponse> updateTask(@PathVariable Long id, @Valid @RequestBody UpdateTaskRequest request) {
 
         Task taskUpdate = taskManagerService.updateTask(id, request);
 
@@ -101,7 +98,6 @@ public class TaskManagerController {
                 .numberEstimatedHours(taskUpdate.getNumberEstimatedHours())
                 .numberRealizeHours(taskUpdate.getNumberRealizeHours() != null ? taskUpdate.getNumberRealizeHours() : null)
                 .build();
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -109,5 +105,4 @@ public class TaskManagerController {
     public void deleteTask(@PathVariable Long id) {
         this.taskManagerService.deleteTask(id);
     }
-
 }

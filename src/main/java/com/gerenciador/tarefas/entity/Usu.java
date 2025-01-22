@@ -22,12 +22,9 @@ public class Usu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
     @Column(unique = true, length = 50)
     private String username;
-
     @Column(length = 150)
-    //the password has to be longer, because of its encryption.
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

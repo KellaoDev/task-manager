@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestApiController {
-
     @GetMapping("/teste-api")
     public String teste () { return "Sucesso"; }
 

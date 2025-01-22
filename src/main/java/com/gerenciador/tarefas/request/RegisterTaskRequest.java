@@ -12,12 +12,13 @@ import org.hibernate.validator.constraints.Length;
 @Builder
 public class RegisterTaskRequest {
 
-    @NotBlank(message = "{register.task.request.title.obrigatorio}")
+    @NotBlank(message = "{register.task.request.title.required}")
     private String title;
-    @Length(max = 50, message = "{register.task.request.description.limite}")
+    @Length(max = 50, message = "{register.task.request.description.limit}")
     private String description;
+    @NotNull(message = "{register.task.request.creatorId.required}")
     private Long creatorId;
-    @NotNull(message = "{register.task.request.numberEstimatedHours.obrigatorio}")
+    @NotNull(message = "{register.task.request.numberEstimatedHours.required}")
     private Integer numberEstimatedHours;
 
 }

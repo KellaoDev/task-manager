@@ -15,15 +15,12 @@ import java.util.List;
 @Getter
 @Setter
 public class Role implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
     @Column
     @Enumerated(EnumType.STRING)
     private RoleEnum name;
-
     @ManyToMany(mappedBy = "roles")
     @JsonBackReference
     private List<Usu> users;

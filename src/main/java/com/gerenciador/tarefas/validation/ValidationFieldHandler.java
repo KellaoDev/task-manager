@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @ControllerAdvice
-public class ValidacaoCamposHandler {
+public class ValidationFieldHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> tratarValidacoes(MethodArgumentNotValidException ex) {

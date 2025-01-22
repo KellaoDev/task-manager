@@ -3,7 +3,6 @@ package com.gerenciador.tarefas.config;
 import com.gerenciador.tarefas.filter.AuthenticationFilter;
 import com.gerenciador.tarefas.filter.LoginFilter;
 import com.gerenciador.tarefas.permissions.RoleEnum;
-import com.gerenciador.tarefas.service.UserAuthenticatedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
-    @Autowired
-    private UserAuthenticatedService userAuthenticatedService;
 
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
