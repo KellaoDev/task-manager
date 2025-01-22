@@ -8,6 +8,7 @@ import com.gerenciador.tarefas.response.GetTasksPagedResponse;
 import com.gerenciador.tarefas.response.GetTasksResponse;
 import com.gerenciador.tarefas.response.UpdateTaskResponse;
 import com.gerenciador.tarefas.service.TaskManagerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,7 +26,7 @@ public class TaskManagerController {
     private TaskManagerService taskManagerService;
 
     @PostMapping
-    public ResponseEntity<CreateTaskResponse> saveTask(@RequestBody RegisterTaskRequest registerTaskRequest) {
+    public ResponseEntity<CreateTaskResponse> saveTask(@Valid @RequestBody RegisterTaskRequest registerTaskRequest) {
         Task taskSave = taskManagerService.saveTask(registerTaskRequest);
 
         CreateTaskResponse response = CreateTaskResponse
