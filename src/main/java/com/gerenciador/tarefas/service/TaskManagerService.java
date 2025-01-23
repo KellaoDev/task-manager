@@ -1,6 +1,9 @@
 package com.gerenciador.tarefas.service;
 
 import com.gerenciador.tarefas.entity.Task;
+import com.gerenciador.tarefas.exceptions.NotPermittedDeleteException;
+import com.gerenciador.tarefas.exceptions.NotPermittedUpdateTaskStatusException;
+import com.gerenciador.tarefas.exceptions.TaskExistingException;
 import com.gerenciador.tarefas.repository.TaskManagerRepository;
 import com.gerenciador.tarefas.request.RegisterTaskRequest;
 import com.gerenciador.tarefas.request.UpdateTaskRequest;
@@ -24,7 +27,18 @@ public class TaskManagerService {
 
     public Task saveTask(RegisterTaskRequest request) {
 
-        Task task = Task.builder().title(request.getTitle()).description(request.getDescription()).taskStatus(TaskStatusEnum.CREATE).creator(userService.findUserById(request.getCreatorId()).get()).numberEstimatedHours(request.getNumberEstimatedHours()).build();
+        Task taskValidation = taskManagerRepository.findByTitleOrDescription(request.getTitle(), request.getDescription());
+
+        if(taskValidation != null) {
+            throw new TaskExistingException("There is already a task with the same title or description");
+        }
+
+        Task task = Task.builder()
+                .title(request.getTitle())
+                .description(request.getDescription())
+                .taskStatus(TaskStatusEnum.CREATE)
+                .creator(userService.findUserById(request.getCreatorId()).get())
+                .numberEstimatedHours(request.getNumberEstimatedHours()).build();
 
         return this.taskManagerRepository.save(task);
 
@@ -42,6 +56,18 @@ public class TaskManagerService {
 
         Task task = this.taskManagerRepository.findById(id).get();
 
+        if (task.getTaskStatus().equals(TaskStatusEnum.FINISHED)) {
+            throw new NotPermittedUpdateTaskStatusException("Not allowed task that is finished");
+        }
+
+        if (task.getTaskStatus().equals(TaskStatusEnum.CREATE) && request.getTaskStatus().equals(TaskStatusEnum.FINISHED)) {
+            throw new NotPermittedUpdateTaskStatusException("Not allowed to move task to finished if it is in created state of CREATE");
+        }
+
+        if (task.getTaskStatus().equals(TaskStatusEnum.BLOCKED) && request.getTaskStatus().equals(TaskStatusEnum.FINISHED)) {
+            throw new NotPermittedUpdateTaskStatusException("Not allowed to move task to finished if it is in created state of BLOCKED");
+        }
+
         task.setTitle(request.getTitle());
         task.setTaskStatus(request.getTaskStatus());
         task.setDescription(request.getDescription());
@@ -55,6 +81,13 @@ public class TaskManagerService {
     }
 
     public void deleteTask(Long id) {
+
+        Task task = this.taskManagerRepository.findById(id).get();
+
+        if(!TaskStatusEnum.CREATE.equals(task.getTaskStatus())) {
+            throw new NotPermittedDeleteException();
+        }
+
         this.taskManagerRepository.deleteById(id);
     }
 }

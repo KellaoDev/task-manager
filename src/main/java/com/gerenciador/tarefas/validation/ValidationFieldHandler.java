@@ -20,14 +20,14 @@ import java.util.Map;
 public class ValidationFieldHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> tratarValidacoes(MethodArgumentNotValidException ex) {
-        List<Map<String, String>> listaErros = ex.getBindingResult()
+    public ResponseEntity<ErrorResponse> processValidations(MethodArgumentNotValidException ex) {
+        List<Map<String, String>> listErrors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(erro -> {
                     Map<String, String> errors = new HashMap<>();
-                    errors.put("campo", obterNomePropriedade(erro));
-                    errors.put("descricao", erro.getDefaultMessage());
+                    errors.put("field", getNameProperties(erro));
+                    errors.put("description", erro.getDefaultMessage());
 
                     return errors;
                 })
@@ -36,22 +36,22 @@ public class ValidationFieldHandler {
         ErrorResponse response = ErrorResponse
                 .builder()
                 .status(HttpStatus.BAD_REQUEST.toString())
-                .errors(listaErros)
+                .errors(listErrors)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    private String obterNomePropriedade(final FieldError error) {
+    private String getNameProperties(final FieldError error) {
         if (error.contains(ConstraintViolation.class)) {
 
             try {
-                final ConstraintViolation<?> violacao = error.unwrap(ConstraintViolation.class);
-                final Field campo = violacao.getRootBeanClass().getDeclaredField(error.getField());
-                final JsonProperty anotacao = campo.getAnnotation(JsonProperty.class);
+                final ConstraintViolation<?> violation = error.unwrap(ConstraintViolation.class);
+                final Field field = violation.getRootBeanClass().getDeclaredField(error.getField());
+                final JsonProperty annotation = field.getAnnotation(JsonProperty.class);
 
-                if (anotacao != null && anotacao.value() != null && !anotacao.value().isEmpty()) {
-                    return anotacao.value();
+                if (annotation != null && annotation.value() != null && !annotation.value().isEmpty()) {
+                    return annotation.value();
                 }
             } catch (Exception e) {
             }

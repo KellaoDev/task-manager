@@ -14,7 +14,7 @@ public class RegisterTaskRequest {
 
     @NotBlank(message = "{register.task.request.title.required}")
     private String title;
-    @Length(max = 50, message = "{register.task.request.description.limit}")
+    @Length(max = 150, message = "{register.task.request.description.limit}")
     private String description;
     @NotNull(message = "{register.task.request.creatorId.required}")
     private Long creatorId;
