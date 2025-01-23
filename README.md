@@ -14,8 +14,8 @@ POST {LOCALHOST}/login
 
 | Field   | Type       | Required                                   |  allowed values| 
 | :---------- | :--------- | :------------------------------------------ | :------|
-| `username`      | `string` | **Yes** | Qualquer string (usuário padrão: admin) |
-| `password`      | `string` | **Yes** | Qualquer string (senha padrão: 123456)|
+| `username`      | `string` | **Yes** | Any string (default user: admin) |
+| `password`      | `string` | **Yes** | Any string (default password: 123456)|
 
 
 #### Add task
@@ -27,8 +27,8 @@ POST {LOCALHOST}/task-manager
 | Field   | Type       | Required                                   |  allowed values| 
 | :---------- | :--------- | :------------------------------------------ | :------|
 | `Authorization`      | `string` | **Yes** | Bearer eyJhbGciOiJIUzI1Ni... **()** |
-| `title`      | `string` | **Yes** | Qualquer string |
-| `description`      | `string` | **Yes** | Qualquer string **(Max. 150 caracteres)**  | 
+| `title`      | `string` | **Yes** | Any string |
+| `description`      | `string` | **Yes** | Any string **(Max. 150 characters)**  | 
 | `creatorId`      | `integer (int64)` | **Yes** | > 0 |
 | `numberEstimatedHours`      | `integer` | **Yes** | > 0 |
 
@@ -52,8 +52,8 @@ PUT {LOCALHOST}/task-manager/{id}
 | Field   | Type       | Required                                   |  allowed values| 
 | :---------- | :--------- | :------------------------------------------ | :------|
 | `Authorization`      | `string` | **Yes** | Bearer eyJhbGciOiJIUzI1Ni... |
-| `title`      | `string` | **Yes** | Qualquer string |
-| `description`      | `string` | **Yes** | Qualquer string **(Max. 150 caracteres)**  | 
+| `title`      | `string` | **Yes** | Any string |
+| `description`      | `string` | **Yes** | Any string **(Max. 150 characters)**  | 
 | `taskStatus`      | `enum` | **No** | create, processing, blocked, finished  | 
 | `responsibleId`      | `integer (int64)` | **No** | > 0 |
 | `numberEstimatedHours`      | `integer` | **Yes** | > 0 |
