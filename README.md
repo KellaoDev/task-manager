@@ -1,87 +1,87 @@
 # Task Manager
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KellaoDev)
-# Sobre o projeto
+# About the project
 
-Task Manager criado para aprimorar meus conhecimentos com spring framework, é uma api rest que os usuários podem adicionar, obter, atualizar e deletar tarefas de sua lista pessoal.
+Task Manager created to improve my knowledge with spring framework, it is a rest api that users can add, get, update and delete tasks from their personal list.
 
-## Documentação da API
+## API documentation
 
-#### Efetuar Login
+#### Login
 
 ```http
 POST {LOCALHOST}/login
 ```
 
-| Campo   | Tipo       | Obrigatório                                   |  Valores Permitidos| 
+| Field   | Type       | Required                                   |  allowed values| 
 | :---------- | :--------- | :------------------------------------------ | :------|
-| `username`      | `string` | **Sim** | Qualquer string (usuário padrão: admin) |
-| `password`      | `string` | **Sim** | Qualquer string (senha padrão: 123456)|
+| `username`      | `string` | **Yes** | Qualquer string (usuário padrão: admin) |
+| `password`      | `string` | **Yes** | Qualquer string (senha padrão: 123456)|
 
 
-#### Adicionar tarefa
+#### Add task
 
 ```http
 POST {LOCALHOST}/task-manager
 ```
 
-| Campo   | Tipo       | Obrigatório                                   |  Valores Permitidos| 
+| Field   | Type       | Required                                   |  allowed values| 
 | :---------- | :--------- | :------------------------------------------ | :------|
-| `Authorization`      | `string` | **Sim** | Bearer eyJhbGciOiJIUzI1Ni... **()** |
-| `title`      | `string` | **Sim** | Qualquer string |
-| `description`      | `string` | **Sim** | Qualquer string **(Max. 150 caracteres)**  | 
-| `creatorId`      | `integer (int64)` | **Sim** | > 0 |
-| `numberEstimatedHours`      | `integer` | **Sim** | > 0 |
+| `Authorization`      | `string` | **Yes** | Bearer eyJhbGciOiJIUzI1Ni... **()** |
+| `title`      | `string` | **Yes** | Qualquer string |
+| `description`      | `string` | **Yes** | Qualquer string **(Max. 150 caracteres)**  | 
+| `creatorId`      | `integer (int64)` | **Yes** | > 0 |
+| `numberEstimatedHours`      | `integer` | **Yes** | > 0 |
 
 
-#### Obter tarefa
+#### Get task
 
 ```http
 GET {LOCALHOST}/task-manager
 ```
 
-| Campo   | Tipo       | Obrigatório                                   |  Valores Permitidos| 
+| Field   | Type       | Required                                   |  allowed values| 
 | :---------- | :--------- | :------------------------------------------ | :------|
-| `Authorization`      | `string` | **Sim** | Bearer eyJhbGciOiJIUzI1Ni... |
+| `Authorization`      | `string` | **Yes** | Bearer eyJhbGciOiJIUzI1Ni... |
 
-#### Atualizar tarefa
+#### Update task
 
 ```http
 PUT {LOCALHOST}/task-manager/{id}
 ```
 
-| Campo   | Tipo       | Obrigatório                                   |  Valores Permitidos| 
+| Field   | Type       | Required                                   |  allowed values| 
 | :---------- | :--------- | :------------------------------------------ | :------|
-| `Authorization`      | `string` | **Sim** | Bearer eyJhbGciOiJIUzI1Ni... |
-| `title`      | `string` | **Sim** | Qualquer string |
-| `description`      | `string` | **Sim** | Qualquer string **(Max. 150 caracteres)**  | 
-| `taskStatus`      | `enum` | **Não** | create, processing, blocked, finished  | 
-| `responsibleId`      | `integer (int64)` | **Não** | > 0 |
-| `numberEstimatedHours`      | `integer` | **Sim** | > 0 |
-| `numberRealizeHours`      | `integer` | **Não** | >= 0 |
+| `Authorization`      | `string` | **Yes** | Bearer eyJhbGciOiJIUzI1Ni... |
+| `title`      | `string` | **Yes** | Qualquer string |
+| `description`      | `string` | **Yes** | Qualquer string **(Max. 150 caracteres)**  | 
+| `taskStatus`      | `enum` | **No** | create, processing, blocked, finished  | 
+| `responsibleId`      | `integer (int64)` | **No** | > 0 |
+| `numberEstimatedHours`      | `integer` | **Yes** | > 0 |
+| `numberRealizeHours`      | `integer` | **Yes** | >= 0 |
 
-#### Deletar tarefa
+#### Delete task
 
 ```http
 DELETE {LOCALHOST}/task-manager/{id}
 ```
 
-| Campo   | Tipo       | Obrigatório                                   |  Valores Permitidos| 
+| Field   | Type       | Required                                   |  allowed values| 
 | :---------- | :--------- | :------------------------------------------ | :------|
-| `Authorization`      | `string` | **Sim** | Bearer eyJhbGciOiJIUzI1Ni... **()** |
+| `Authorization`      | `string` | **Yes** | Bearer eyJhbGciOiJIUzI1Ni... **()** |
 
-## Tecnologias utilizadas
+## Technologies used
 
 #### • Java
 #### • Spring Framework
 #### • PostgreSQL / Hibernate
 #### • Git / GitHub
 
-## Como executar o projeto 
+## How to execute the project
 
-### Pré requisitos: 
+### Prerequisites:
 
 
-#### Certifique-se de ter instalados:
+#### Make sure you have installed:
 
 JDK 17 → java -version
 
@@ -89,27 +89,27 @@ Maven → mvn -version
 
 Banco de Dados (PostgreSQL)
 
-Git (se for clonar o repositório)
+Git (if you are going to clone the repository)
 
 ```bash
-# clonar repositório
+# Clone repository
 https://github.com/KellaoDev/task-manager
 
-# Configurar banco de dados
-No arquivo application.properties:
-Exemplo(PostgreSQL)
+# Configure database
+In the archive application.properties:
+Example(PostgreSQL)
 
 spring.datasource.url=jdbc:postgresql://localhost:5432/seu_banco
-spring.datasource.username=seu_usuario
-spring.datasource.password=sua_senha
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 
-# Executar o projeto com Maven
+# Run the project with Maven
 mvn spring-boot:run
 
-# Acessar a API
-http://localhost:8080 (ou outra porta configurada)
+# Access the API
+http://localhost:8080 (or another configured port)
 ```
-## Autor
+## Author
 
 ### Kélio Cirilo da Silva Filho
 https://www.linkedin.com/in/keliocirilo/
