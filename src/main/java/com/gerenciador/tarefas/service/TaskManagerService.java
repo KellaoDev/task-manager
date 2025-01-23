@@ -45,11 +45,11 @@ public class TaskManagerService {
     }
 
     public Page<Task> getTaskByTitle(String title, Pageable pageable) {
-        return this.taskManagerRepository.findByTitleContaining(title, pageable);
+        return this.taskManagerRepository.findByTitleContainingOrderByDateUpdateDesc(title, pageable);
     }
 
     public Page<Task> getAllTask(Pageable pageable) {
-        return this.taskManagerRepository.findAll(pageable);
+        return this.taskManagerRepository.findAllByOrderByDateUpdateDesc(pageable);
     }
 
     public Task updateTask(Long id, UpdateTaskRequest request) {
