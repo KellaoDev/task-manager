@@ -74,12 +74,10 @@ DELETE {LOCALHOST}/task-manager/{id}
 #### • Java
 #### • Spring Framework
 #### • PostgreSQL / Hibernate
-#### • Git / GitHub
 
 ## How to execute the project
 
 ### Prerequisites:
-
 
 #### Make sure you have installed:
 
@@ -88,8 +86,6 @@ JDK 17 → java -version
 Maven → mvn -version
 
 Banco de Dados (PostgreSQL)
-
-Git (if you are going to clone the repository)
 
 ```bash
 # Clone repository
