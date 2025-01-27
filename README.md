@@ -85,7 +85,7 @@ JDK 17 → java -version
 
 Maven → mvn -version
 
-Banco de Dados (PostgreSQL)
+Database (PostgreSQL)
 
 ```bash
 # Clone repository
@@ -95,7 +95,7 @@ https://github.com/KellaoDev/task-manager
 In the archive application.properties:
 Example(PostgreSQL)
 
-spring.datasource.url=jdbc:postgresql://localhost:5432/seu_banco
+spring.datasource.url=jdbc:postgresql://localhost:5432/your_database
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 
