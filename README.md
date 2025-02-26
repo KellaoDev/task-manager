@@ -89,7 +89,7 @@ Database (PostgreSQL)
 
 ```bash
 # Clone repository
-https://github.com/KellaoDev/task-manager
+https://github.com/KellaoDev/task-manager.git
 
 # Configure database
 In the archive application.properties:
